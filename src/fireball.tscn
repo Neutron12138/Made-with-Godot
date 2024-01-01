@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbtu5wyr8rkqj"]
+
+[ext_resource type="Script" path="res://src/fireball.gd" id="1_dhuuo"]
+[ext_resource type="Texture2D" uid="uid://c6ek2pnvw7wk" path="res://assets/fireball.png" id="1_nxmcj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vghr1"]
+size = Vector2(100, 100)
+
+[sub_resource type="Curve2D" id="Curve2D_w1rgr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, -46, 0, 0, 0, 0, -29, -35, 0, 0, 0, 0, -45, 0, 0, 0, 0, 0, -29, 32, 0, 0, 0, 0, -1, 44, 0, 0, 0, 0, 31, 32, 0, 0, 0, 0, 44, 0, 0, 0, 0, 0, 34, -27, 0, 0, 0, 0, -1, -47)
+}
+point_count = 9
+
+[node name="Fireball" type="Area2D"]
+script = ExtResource("1_dhuuo")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vghr1")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_nxmcj")
+
+[node name="path" type="Path2D" parent="."]
+curve = SubResource("Curve2D_w1rgr")
+
+[node name="follower" type="PathFollow2D" parent="path"]
+position = Vector2(-1, -46)
+rotation = 2.76726
+
+[node name="particles" type="Node2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
